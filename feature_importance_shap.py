@@ -122,7 +122,7 @@ def run_shap_workflow_for_model_yearly(
     dynamic_features,
     out_dir,
     months_to_explain=(1, 7),           # (Jan, Jul)
-    n_samples=1,
+    n_samples=300,
     
     seed=42
 ):
@@ -148,7 +148,7 @@ def run_shap_workflow_for_model_yearly(
 
     dyn_idx = [feature_columns.index(f) for f in dynamic_features]
 
-    for pkl_path, region_name, experiment_name in yearly_paths:
+    for pkl_path, region_name in yearly_paths:
         X_all, y_all, meta_all = load_yearly_samples(pkl_path)
         window_size = X_all.shape[1]
         assert window_size == 4, "Dein dyn_names_flat unten ist aktuell auf window=4 gebaut."
@@ -237,6 +237,8 @@ MLP = MLPModel(
     dropout=HPARAMS_MLP["dropout"],
 ).to(device)
 MLP.load_state_dict(torch.load(DATA_PATHS_MLP["model_out"]))
+
+#MLP.load_state_dict(torch.load("/data/stu231428/Master_Thesis/main/trained_models/mlp_with_pos.pt"))
 
 XGBoost = pickle.load(open(DATA_PATHS_XGBoost["model_out"], "rb"))
 
