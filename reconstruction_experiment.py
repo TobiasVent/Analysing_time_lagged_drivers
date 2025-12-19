@@ -77,10 +77,10 @@ data_paths = [
 
 
 #path to your cach directory
-cache_dir = ""
+
 
 #path where you want to save the plots
-out_dir = "/media/stu231428/1120 7818/Master_github/datasets/plots/reconstruction/"
+out_dir = "data/results/visualisation_reconstruction"
 month_map = {
     1: "January",
     7: "July",
@@ -151,6 +151,8 @@ for path in data_paths:
         else:
             model_name = real_model_name
 
+
+        cache_dir = f"data/reconstruction_cache/{simulation_key}/{region_key}"
         # Load cached reconstruction results
         cache_file = f"{cache_dir}/{model_name}_{region_key}_reconstruction_{YEAR}_{simulation_key}.pkl"
         df_cache = pd.read_pickle(cache_file)

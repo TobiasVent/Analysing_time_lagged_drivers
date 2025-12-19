@@ -60,11 +60,11 @@ print(f"Using device: {device}")
 # -------------------------------------------------------------------------
 model_files = ["LSTM", "Attention_LSTM", "MLP", "XGBoost"]
 
-# Path to your cache directory
-cache_dir = "/media/stu231428/1120 7818/Master_github/datasets/cache"
+
+
 
 # Directory where you want to save the plots
-out_dir = "/media/stu231428/1120 7818/Master_github/datasets/plots/scatter_plots"
+out_dir = "data/results/scatter_plots"
 
 # -------------------------------------------------------------------------
 # Region mapping
@@ -113,6 +113,17 @@ for path in data_paths:
 
     for model_name, (ModelClass, model_obj, model_kwargs) in model_files.items():
         # Collect yearly cache files for the requested period
+        
+
+
+        if simulation_key ==  "experiment_1":
+            START_YEAR = 2009
+            END_YEAR  = 2018
+        if simulation_key == "experiment_5":
+            START_YEAR = 1959
+            END_YEAR = 2018
+        cache_dir = f"data/reconstruction_cache/{simulation_key}/{region_key}"
+        
         years = range(START_YEAR, END_YEAR + 1)
 
         files = []

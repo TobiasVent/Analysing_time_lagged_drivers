@@ -14,7 +14,7 @@ END_YEAR = 2012
 
 
 
-experiment_name = "experiment_1"
+experiment_name = "experiment_5"
 out_dir = "data/results/annual_seasonal_plots/"
 
 # -------------------------------------------------------------------------
