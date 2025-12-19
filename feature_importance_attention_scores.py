@@ -103,6 +103,13 @@ lstm_model_attention_temporal.load_state_dict(
         map_location=device
     )
 )
+# lstm_model_attention_temporal.load_state_dict(
+#     torch.load(
+#        "/data/stu231428/Master_Thesis/main/trained_models/attention_temporal_lstm_with_pos.pt",
+#         map_location=device
+#     )
+# )
+
 lstm_model_attention_temporal.eval()
 
 
