@@ -59,6 +59,7 @@ print(f"Using device: {device}")
 # Model selection
 # -------------------------------------------------------------------------
 model_files = ["LSTM", "Attention_LSTM", "MLP", "XGBoost"]
+#model_files = ["LSTM", "LSTM", "LSTM", "LSTM"]
 
 
 
@@ -83,7 +84,7 @@ simulation_map = {
 }
 
 # -------------------------------------------------------------------------
-# Data paths
+# Data paths: Add here Regions and experiment name you want to analyse. there must be a cache for each entry 
 # -------------------------------------------------------------------------
 data_paths = [
     "North_Atlantic_experiment_1",
@@ -96,7 +97,7 @@ data_paths = [
 # -------------------------------------------------------------------------
 # Time range for the scatter plot (inclusive)
 # -------------------------------------------------------------------------
-START_YEAR = 2018
+START_YEAR = 2009
 END_YEAR = 2018
 
 # -------------------------------------------------------------------------
@@ -111,7 +112,7 @@ for path in data_paths:
     simulation_key = [k for k in simulation_map if k in path][0]
     simulation_name = simulation_map[simulation_key]
 
-    for model_name, (ModelClass, model_obj, model_kwargs) in model_files.items():
+    for model_name  in model_files:
         # Collect yearly cache files for the requested period
         
 
