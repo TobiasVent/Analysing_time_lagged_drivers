@@ -105,7 +105,7 @@ To generate the test datasets, execute:
 
 In this script:
 
-- The **target region** and **temporal range** are specified.
+- The **target region** and **temporal range** and **experiment_name** are specified.
 - The script generates **one test dataset per selected year**, which is later used
   for reconstruction and evaluation.
 
