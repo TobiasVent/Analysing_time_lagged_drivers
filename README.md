@@ -156,7 +156,26 @@ These scripts apply the trained models to the test data and create
 **year-wise cache files** containing spatially and temporally resolved
 CO₂ flux information.
 
----
+### Required Configuration
+
+Before running the reconstruction scripts, the following parameters must be
+specified directly within the script:
+
+- **`experiment_name`**  
+  Selects the experiment to be reconstructed  
+  (`experiment_1` or `experiment_5`)
+
+- **`region`**  
+  Target region for the reconstruction  
+  (`North_Atlantic`, `Southern_Ocean`, or `global`)
+
+- **`start_year`** and **`end_year`**  
+  Define the temporal range over which the reconstruction is performed
+
+The reconstruction is carried out independently for each year within the
+specified time span. For each model and each year, a separate cache file is
+generated.
+
 
 ### Reconstruction Procedure
 
