@@ -125,9 +125,9 @@ month_map = {
 
 # Paths to yearly test datasets
 data_paths = [
-    ("/media/stu231428/1120 7818/Master_github/datasets/yearly/global_test_2018_experiment_1.pkl",
+    ("data/test_sest/experiment_1/North_Atlantic/North_Atlantic_test_2018_experiment_1.pkl",
      "North_Atlantic"),
-    ("/media/stu231428/1120 7818/Master_github/datasets/yearly/global_test_2018_experiment_1.pkl",
+    ("data/test_sest/experiment_1/North_Atlantic/Southern_Ocean_test_2018_experiment_1.pkl",
      "Southern_Ocean"),
 ]
 
@@ -158,7 +158,7 @@ dynamic_labels = [label_map.get(f, f) for f in dynamic_features]
 dynamic_idx = list(range(10))
 
 # Output directory
-out_dir = "/media/stu231428/1120 7818/Master_github/datasets/plots/feature_importance/"
+out_dir = "data/results/feature_importance/"
 os.makedirs(out_dir, exist_ok=True)
 
 
