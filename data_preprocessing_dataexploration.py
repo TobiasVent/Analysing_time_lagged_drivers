@@ -82,7 +82,7 @@ def concat_data(range_start,range_end,frac,experiment_name,region):
             print("Region not defined properly. Please choose 'global', 'Southern_Ocean' or 'North_Atlantic'")
         time_series = pd.concat([time_series,df])
 
-    out_dir = "data/data_exploration"
+    out_dir = "data/data_exploration/concatenated_years"
     os.makedirs(out_dir, exist_ok=True)
 
     out_file = f"{out_dir}/{region}_{range_start}_{range_end}_{experiment_name}.pkl"
