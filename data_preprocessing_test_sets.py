@@ -198,9 +198,14 @@ def preprocess_yearwise(
 # -------------------------------------------------
 # Configuration
 # -------------------------------------------------
+
+#REGION Options: global, North_Atlantic, Southern_Ocean. It has to be spelled like that 
 experiment_name = "experiment_1"
+#experiment_name = "experiment_5"
 YEARS = range(2018, 2019)
-REGION = "global"
+#REGION = "global"
+REGION = "North_Atlantic"
+#REGION = "Southern_Ocean"
 out_dir = f"data/test_sest/{experiment_name}/{REGION}"
 
 # -------------------------------------------------
