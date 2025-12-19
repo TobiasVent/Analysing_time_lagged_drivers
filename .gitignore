@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Never track generated images / reports / pickle files / trained_models
+*.png
+*.pdf
+*.pkl
+*.pt
