@@ -177,15 +177,6 @@ specified time span. For each model and each year, a separate cache file is
 generated.
 
 
-### Reconstruction Procedure
-
-- The user specifies the **experiment** (`experiment_1` or `experiment_5`).
-- The **target region** (`North_Atlantic`, `Southern_Ocean`, or `global`) is selected.
-- A **start year** and **end year** define the temporal range of the reconstruction.
-- For **each model** and **each year** within this range, predictions are computed independently.
-- The results are stored **year-wise**, such that **one cache file is created per model and per year**.
-
----
 
 ### Cache Contents
 
