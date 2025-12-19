@@ -17,3 +17,5 @@ xgboost
 # --- Maps (you import cartopy) ---
 cartopy
 mpl_scatter_density
+
+optuna
