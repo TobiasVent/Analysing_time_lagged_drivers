@@ -122,54 +122,41 @@ for experiment_name, exp_cfg in experiments.items():
     df_month_North_Atlantic_july = monthly_means_NA[monthly_means_NA["month"] == 7]
     df_month_South_Ocean_july = monthly_means_SO[monthly_means_SO["month"] == 7]    
 
-    # Rename columns for plotting
-    df_na_jan_plot = df_month_North_Atlantic_january.rename(columns=pretty_labels)
-    df_na_jul_plot = df_month_North_Atlantic_july.rename(columns=pretty_labels)
-    df_so_jan_plot = df_month_South_Ocean_january.rename(columns=pretty_labels)
-    df_so_jul_plot = df_month_South_Ocean_july.rename(columns=pretty_labels)
+    matrix_na_jan = df_month_North_Atlantic_january.corr()
+    matrix_so_jan = df_month_South_Ocean_january.corr()
+    matrix_na_jul = df_month_North_Atlantic_july.corr()
+    matrix_so_jul = df_month_South_Ocean_july.corr()
 
-    # ---------------------------------------------------------------------
-    # Plot KDE distributions
-    # ---------------------------------------------------------------------
-    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
-    sns.set(font_scale=1.2)
+    matrix_na_jan = matrix_na_jan.rename(index=pretty_labels, columns=pretty_labels)
+    matrix_na_jul = matrix_na_jul.rename(index=pretty_labels, columns=pretty_labels)
+    matrix_so_jan = matrix_so_jan.rename(index=pretty_labels, columns=pretty_labels)
+    matrix_so_jul = matrix_so_jul.rename(index=pretty_labels, columns=pretty_labels)
+    # === Plot Setup ===
+    fig, axes = plt.subplots(2, 2, figsize=(18, 18))
+    sns.set(font_scale=1.3)
 
-    # North Atlantic
-    sns.kdeplot(df_na_jan_plot, palette=custom_colors, fill=True,
-                ax=axes[0, 0], clip=(-4, 4))
-    axes[0, 0].set_title(f"North Atlantic – January ({exp_cfg['label']})", fontsize=18)
+    # === Plot ===
+    sns.heatmap(matrix_na_jan, ax=axes[0, 0], cmap='coolwarm', annot=True, vmin=-1, vmax=1, 
+                cbar=False, fmt=".2f")
+    axes[0, 0].set_title("North Atlantic - January", fontsize=18)
 
-    sns.kdeplot(df_na_jul_plot, palette=custom_colors, fill=True,
-                ax=axes[0, 1], clip=(-4, 4))
-    axes[0, 1].set_title(f"North Atlantic – July ({exp_cfg['label']})", fontsize=18)
+    sns.heatmap(matrix_na_jul, ax=axes[0, 1], cmap='coolwarm', annot=True, vmin=-1, vmax=1, 
+                cbar=False, fmt=".2f")
+    axes[0, 1].set_title("North Atlantic - July", fontsize=18)
 
-    # Southern Ocean
-    sns.kdeplot(df_so_jan_plot, palette=custom_colors, fill=True,
-                ax=axes[1, 0], clip=(-4, 4))
-    axes[1, 0].set_title(f"Southern Ocean – January ({exp_cfg['label']})", fontsize=18)
+    sns.heatmap(matrix_so_jan, ax=axes[1, 0], cmap='coolwarm', annot=True, vmin=-1, vmax=1, 
+                cbar=False, fmt=".2f")
+    axes[1, 0].set_title("Southern Ocean - January", fontsize=18)
 
-    sns.kdeplot(df_so_jul_plot, palette=custom_colors, fill=True,
-                ax=axes[1, 1], clip=(-4, 4))
-    axes[1, 1].set_title(f"Southern Ocean – July ({exp_cfg['label']})", fontsize=18)
+    sns.heatmap(matrix_so_jul, ax=axes[1, 1], cmap='coolwarm', annot=True, vmin=-1, vmax=1, 
+                cbar=False, fmt=".2f")
+    axes[1, 1].set_title("Southern Ocean - July", fontsize=18)
 
-    # ---------------------------------------------------------------------
-    # Axis formatting
-    # ---------------------------------------------------------------------
+    # Make tick labels larger
     for ax in axes.flat:
-        ax.set_ylim(0, 0.6)
-        ax.set_xlabel("Normalized Value (Z-Score)", fontsize=16)
-        ax.set_ylabel("Density", fontsize=16)
-        ax.grid(True)
-        ax.tick_params(axis="both", labelsize=16)
+        ax.tick_params(axis='both', labelsize=16)
 
-    # ---------------------------------------------------------------------
-    # Save and show figure
-    # ---------------------------------------------------------------------
+    # Layout optimieren
     plt.tight_layout()
-    output_path = (
-        f"data/data_exploration/combined_displots_monthly_mean_{experiment_name}.png"
-    )
-    plt.savefig(output_path, dpi=150)
+    plt.savefig(f"data/data_exploration/combined_correlation_matrix_{experiment_name}.png", dpi=150)
     plt.show()
-
-    print(f"Saved figure: {output_path}")
