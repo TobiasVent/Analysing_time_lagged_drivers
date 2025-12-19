@@ -1,5 +1,6 @@
 # Analysing Time-Lagged Drivers of Oceanic CO₂ Flux Using Deep Learning Models for Multivariate Time Series Prediction
-
+Autor: Tobias Vent
+Email: venttobias@gmail.com
 ## Abstract
 
 The Earth system model FOCI-MOPS integrates physical and biogeochemical components of the ocean to simulate key processes of the global carbon cycle, including oceanic CO₂ fluxes. However, its biogeochemical module is computationally demanding, which limits simulation efficiency. This thesis investigates whether these CO₂ fluxes can be reconstructed solely from time-lagged physical ocean parameters using deep learning methods, while maintaining reliable predictive performance.
@@ -10,8 +11,16 @@ This thesis presents a promising approach to accelerate climate simulations whil
 
 
 
+## Python Environment Setup
+
+Create and activate a virtual Python environment from the project root:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 
 
+pip install -r requirements.txt
 
 
 
