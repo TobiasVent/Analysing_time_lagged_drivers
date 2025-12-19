@@ -201,6 +201,10 @@ The generated cache files serve as the basis for subsequent analysis steps.
 
 ## Available Analysis Scripts
 
+
+- **`model_metrics.py`**  
+  Calculates performance metrics for each test set for each model
+
 - **`reconstruction_experiment.py`**  
   Compares reconstructed and simulated CO₂ fluxes on spatial maps.
 
