@@ -1,33 +1,88 @@
+## Data Exploration
+
+As a first step in the data exploration workflow, execute:
+
+- **`data_preprocessing_dataexploration.py`**
+
+This script creates **regional, concatenated multi-year datasets** for:
+
+- **North Atlantic** – `experiment_1`
+- **Southern Ocean** – `experiment_1`
+- **North Atlantic** – `experiment_5`
+- **Southern Ocean** – `experiment_5`
+
+It loads the yearly `.pkl` files, concatenates them over the specified
+time period, and stores the results in:
+
+- `data/data_exploration/concatenated_years/`
+
+All subsequent data exploration and analysis scripts operate on these
+concatenated datasets.
+
+---
+
+### Monthly Mean Seasonal Cycles
+
+Execute:
+
+- **`data_exploration_monthly_mean.py`**
+
+This script computes and visualizes **monthly mean seasonal cycles** for all input
+features in the **North Atlantic** and **Southern Ocean**, for both
+**`experiment_1`** and **`experiment_5`**.
+
+---
+
+### Feature Distribution Plots
+
+Execute:
+
+- **`data_exploration_distribution_plot.py`**
+
+This script generates **feature distribution plots** for the **North Atlantic**
+and **Southern Ocean**, for both experiments.
+
+---
+
+### Correlation Matrix Analysis
+
+Execute:
+
+- **`data_exploration_corr_matrix_plot.py`**
+
+This script computes and visualizes **correlation matrices** for all input features
+in the **North Atlantic** and **Southern Ocean**, for both experiments.
+
+---
+
 ## Data Preparation and Model Training
-
-
-
 
 ### Training and Validation Data
 
-To generate the training and validation samples, execute:
+To generate the training and validation datasets, execute:
 
 - **`data_preprocessing_training_validation_sets.py`**
 
 Within this script:
+
 - The **fraction used for spatial subsampling** can be specified directly in the function calls.
 - The **temporal range** defining the training and validation periods can be configured.
-- The **file paths** for the training and validation datasets must be set in  
-  **`config.data_paths.py`**.
+- The **file paths** for the training and validation datasets must be specified in  
+  **`config/data_paths.py`**.
 
 ---
 
 ### Test Data Generation
 
-To generate the test datasets, open:
+To generate the test datasets, execute:
 
 - **`data_preprocessing_test_set.py`**
 
 In this script:
-- The **desired temporal range** and **region** must be specified.
-- The script generates **one test set per year that was chosen,**, which is later
 
-  used for reconstruction and evaluation.
+- The **target region** and **temporal range** are specified.
+- The script generates **one test dataset per selected year**, which is later used
+  for reconstruction and evaluation.
 
 ---
 
@@ -40,6 +95,14 @@ Hyperparameter optimization is performed using:
 The resulting optimal hyperparameters are stored in the corresponding
 model configuration files.
 
+Each model has a dedicated configuration file
+(e.g. **`configs/lstm_config.py`**), in which the final hyperparameters
+obtained during the thesis work are already defined.
+These configuration files also specify:
+
+- the directory where the trained model is saved,
+- the location where training statistics (e.g. loss curves, metrics) are stored.
+
 Model training is then carried out by executing:
 
 - **`train_lstm.py`**
@@ -47,32 +110,38 @@ Model training is then carried out by executing:
 - **`train_mlp.py`**
 - **`train_xgboost.py`**
 
-These scripts train the final models using the prepared training and validation datasets.
+These scripts load the predefined hyperparameters from the corresponding
+configuration files and train the final models using the prepared
+training and validation datasets.
 
+---
 
 ## CO₂ Flux Reconstruction from Test Data
 
 The reconstruction of CO₂ flux fields is performed using the generated test datasets.
 For this purpose, the reconstruction scripts
 
-- `reconstruct_test_set_cache_lstm.py`
-- `reconstruct_test_set_cache_xgboost.py`
-- (and analogous scripts for other models)
+- **`reconstruct_test_set_cache_lstm.py`**
+- **`reconstruct_test_set_cache_xgboost.py`**
+- *(and analogous scripts for other models)*
 
 are executed.
 
-These scripts apply the trained models to the test data and create **yearly cache files**
-containing spatially and temporally resolved CO₂ flux information.
+These scripts apply the trained models to the test data and create
+**year-wise cache files** containing spatially and temporally resolved
+CO₂ flux information.
+
+---
 
 ### Reconstruction Procedure
 
-- The user specifies the 
--The **experiment** (`experiment_1` or `experiment_2`) 
+- The user specifies the **experiment** (`experiment_1` or `experiment_5`).
+- The **target region** (`North_Atlantic`, `Southern_Ocean`, or `global`) is selected.
+- A **start year** and **end year** define the temporal range of the reconstruction.
+- For **each model** and **each year** within this range, predictions are computed independently.
+- The results are stored **year-wise**, such that **one cache file is created per model and per year**.
 
-- the **target region**(`North_Atlantic`, `Southern_Ocean`, or `global`).
-- A **start year** and **end year** define the temporal range over which reconstructions are performed.
-- For **each model** and **each year** within this range, model predictions are computed independently.
-- The results are **stored year-wise**, such that **one cache file is created per model and per year**.
+---
 
 ### Cache Contents
 
@@ -84,38 +153,37 @@ Each yearly cache file contains the following variables:
 - simulated CO₂ flux  
 - reconstructed CO₂ flux  
 
-These caches provide a standardized, model-specific and year-resolved representation of the reconstruction results.
+These caches provide a standardized, model-specific and year-resolved
+representation of the reconstruction results.
+
+---
 
 ### Usage of Cached Data
 
-The generated cache files serve as the basis for subsequent analysis steps, including:
+The generated cache files serve as the basis for subsequent analysis steps.
 
-- temporal aggregation (e.g. seasonal or annual means),
-- spatial visualization and mapping,
-- quantitative comparison between simulated and reconstructed CO₂ fluxes,
-- inter-model comparisons across regions and time periods.
+---
 
-
-### Available Experiments
+## Available Analysis Scripts
 
 - **`reconstruction_experiment.py`**  
-  Compares the reconstructed CO₂ flux with the simulated CO₂ flux on a spatial map.
+  Compares reconstructed and simulated CO₂ fluxes on spatial maps.
 
 - **`plot_difference.py`**  
   Visualizes the spatial difference between reconstructed and simulated CO₂ flux.
 
 - **`annual_seasonal.py`**  
-  Generates an annual mean plot and a seasonal mean plot of CO₂ flux.
-  Here you have to select the experiment you want to analyse in the script
+  Generates annual mean and seasonal mean CO₂ flux plots.  
+  The experiment to be analyzed must be selected within the script.
 
 - **`scatter_plots.py`**  
   Produces scatter plots comparing reconstructed versus simulated CO₂ flux values.
 
 - **`feature_importance_shap.py`**  
-  Creates feature importance visualizations for **MLP** and **XGBoost** models using SHAP values.
+  Computes feature importance for **MLP** and **XGBoost** models using SHAP values.
 
 - **`feature_importance_timeshap.py`**  
-  Generates feature importance plots for **LSTM** and **Attention LSTM** models using TimeSHAP.
-- **`feature_importance_attention_scores.py`**  
-  Computes feature importance based on the attention scores produced by the **Attention LSTM** model.
+  Computes feature importance for **LSTM** and **Attention LSTM** models using TimeSHAP.
 
+- **`feature_importance_attention_scores.py`**  
+  Derives feature importance from attention scores produced by the **Attention LSTM** model.
