@@ -89,6 +89,7 @@ def preprocess_yearwise(
 
         # Drop unused columns
         df = df.drop(columns=['tmask', 'y', 'x', 'time_centered', 'e1t', 'e2t'])
+        
 
         # Ensure identical spatial sampling for both years
         df_coords = df[['nav_lat', 'nav_lon']].drop_duplicates().reset_index(drop=True)
@@ -110,14 +111,17 @@ def preprocess_yearwise(
         if region == 'North_Atlantic':
             zone_ARCTIC, zone_NORTH_ATLANTIC, zone_EQ_PACIFIC, zone_SOUTHERN_OCEAN = get_zoned_df(df)
             dfs.append(zone_NORTH_ATLANTIC)
-        else:
-            print("Region not defined properly. Please choose 'global', 'Southern_Ocean' or 'North_Atlantic'")
+
 
     # -------------------------------------------------
     # 2) Combine and sort time series
     # -------------------------------------------------
     ts = pd.concat(dfs)
     ts = ts.sort_values(by=["nav_lat", "nav_lon", "time_counter"])
+
+
+
+
 
     # -------------------------------------------------
     # 3) Cyclic encoding for latitude and longitude
@@ -196,7 +200,7 @@ def preprocess_yearwise(
 # -------------------------------------------------
 experiment_name = "experiment_1"
 YEARS = range(2018, 2019)
-REGION = "North_Atlantic"
+REGION = "global"
 out_dir = f"data/test_sest/{experiment_name}/{REGION}"
 
 # -------------------------------------------------
