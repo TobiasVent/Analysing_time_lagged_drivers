@@ -1,5 +1,5 @@
 
-from pytorch_tabnet.tab_model import TabNetRegressor
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 import time
