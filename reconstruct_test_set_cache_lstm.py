@@ -19,7 +19,7 @@ START_YEAR = 2017
 END_YEAR = 2018
 
 region = "North_Atlantic"
-experiment = "experiment_5"
+experiment = "experiment_1"
 #choose the test set path pattern
 TEST_PATH_PATTERN = (
     "data/test_sest/{experiment}/{region}/{region}_test_{year}_{experiment}.pkl"
@@ -117,13 +117,13 @@ def main():
     # -------------------------------------------------
     # 4) Global normalization (must come from training!)
     # -------------------------------------------------
-    # training_stats_dir = pickle.load(open(Stats_Data_Path["training_stats"], "rb"))
+    training_stats_dir = pickle.load(open("data/training_set/training_stats.pkl", "rb"))
 
-    # target_mean = training_stats_dir["target_mean"]
-    # target_std = training_stats_dir["target_stds"]
+    target_mean = training_stats_dir["target_mean"]
+    target_std = training_stats_dir["target_std"]
         # These should match training normalization
-    target_mean = 0.1847209
-    target_std = 1.3368018
+    # target_mean = 0.1847209
+    # target_std = 1.3368018
 
     # load model once
     model = LSTMModel(
@@ -133,8 +133,8 @@ def main():
         dropout=HPARAMS_LSTM["dropout"],
     ).to(device)
 
-    #model.load_state_dict(torch.load(DATA_PATHS_LSTM["model_out"], map_location=device))
-    model.load_state_dict(torch.load("/data/stu231428/Master_Thesis/main/trained_models/lsmt_with_pos.pt", map_location=device))
+    model.load_state_dict(torch.load(DATA_PATHS_LSTM["model_out"], map_location=device))
+    #model.load_state_dict(torch.load("/data/stu231428/Master_Thesis/main/trained_models/lsmt_with_pos.pt", map_location=device))
     model.eval()
 
     # run yearly
