@@ -298,22 +298,22 @@ lstm_model = LSTMModelTimeShap(
     dropout=HPARAMS_LSTM["dropout"],
 )
 lstm_model.load_state_dict(
-    #torch.load(DATA_PATHS_LSTM["model_out"])
-    torch.load("/data/stu231428/Master_Thesis/main/trained_models/lsmt_with_pos.pt")
+    torch.load(DATA_PATHS_LSTM["model_out"])
+    #torch.load("/data/stu231428/Master_Thesis/main/trained_models/lsmt_with_pos.pt")
 )
 
-lstm_model_attention_temporal = LSTMModelAttentionTemporalTimeShap(
-    input_size=HPARAMS_Attention_LSTM["input_size"],
-    hidden_dim=HPARAMS_Attention_LSTM["hidden_dim"],
-    dropout=HPARAMS_Attention_LSTM["dropout"],
-).to(device)
-lstm_model_attention_temporal.load_state_dict(
-    torch.load(DATA_PATHS_Attention_LSTM["model_out"])
-)
+# lstm_model_attention_temporal = LSTMModelAttentionTemporalTimeShap(
+#     input_size=HPARAMS_Attention_LSTM["input_size"],
+#     hidden_dim=HPARAMS_Attention_LSTM["hidden_dim"],
+#     dropout=HPARAMS_Attention_LSTM["dropout"],
+# ).to(device)
+# lstm_model_attention_temporal.load_state_dict(
+#     torch.load(DATA_PATHS_Attention_LSTM["model_out"])
+# )
 
 models_list = [
     {"model": lstm_model, "name": "LSTM"},
-    {"model": lstm_model_attention_temporal, "name": "Attention LSTM"},
+    #{"model": lstm_model_attention_temporal, "name": "Attention LSTM"},
 ]
 
 # -------------------------------------------------------------------------
@@ -327,7 +327,7 @@ yearly_paths = [
         "experiment_1",
     ),
     (
-        "data/test_sest/experiment_1/North_Atlantic/North_Atlantic_test_2018_experiment_1.pkl",
+        "data/test_sest/experiment_1/Southern_Ocean/Southern_Ocean_test_2018_experiment_1.pkl",
         "Southern Ocean",
         "experiment_1",
     ),

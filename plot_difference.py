@@ -37,8 +37,8 @@ def flatten_sample_x_month(x_month, n_dyn=10, n_static=4):
 # -------------------------------------------------------------------------
 # Device setup
 # -------------------------------------------------------------------------
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#print(f"Using device: {device}")
 
 # -------------------------------------------------------------------------
 # Model definitions
@@ -73,14 +73,14 @@ simulation_map = {
 # You need to compute the cache for 2018 for each region first
 # -------------------------------------------------------------------------
 data_paths = [
-    #"North_Atlantic_experiment_1",
-    #"Southern_Ocean_january_experiment_1",
-    #"Southern_Ocean_july_experiment_1",
-    #"global_experiment_1",
+    "North_Atlantic_experiment_1",
+    "Southern_Ocean_january_experiment_1",
+    "Southern_Ocean_july_experiment_1",
+    "global_experiment_1",
     "North_Atlantic_experiment_5",
-    #"Southern_Ocean_january_experiment_5",
-    #"Southern_Ocean_july_experiment_5",
-    #"global_experiment_5",
+    "Southern_Ocean_january_experiment_5",
+    "Southern_Ocean_july_experiment_5",
+    "global_experiment_5",
 ]
 
 month_map = {

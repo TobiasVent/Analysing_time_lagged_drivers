@@ -43,6 +43,7 @@ print(f"Using device: {device}")
 # Model list
 # -------------------------------------------------------------------------
 model_files = ["Simulation", "LSTM", "Attention_LSTM", "MLP", "XGBoost"]
+#model_files = ["Simulation", "LSTM", "LSTM", "LSTM", "LSTM"]
 
 # -------------------------------------------------------------------------
 # Region mapping
@@ -147,7 +148,7 @@ for path in data_paths:
 
         # Resolve model name for cache lookup
         if real_model_name == "Simulation":
-            model_name = "Simulation"
+            model_name = "LSTM"
         else:
             model_name = real_model_name
 

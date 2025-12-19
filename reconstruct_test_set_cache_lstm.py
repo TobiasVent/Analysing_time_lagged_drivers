@@ -15,7 +15,7 @@ Sample = namedtuple("Sample", ["features", "target", "meta"])
 
 
 #check the years to reconstruct
-START_YEAR = 2017
+START_YEAR = 2018
 END_YEAR = 2018
 
 region = "North_Atlantic"

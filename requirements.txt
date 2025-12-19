@@ -1,10 +1,18 @@
+# --- Core stack pinned for TimeSHAP compatibility ---
+numpy<2
+shap<=0.42.1
+timeshap==1.0.4
+altair<6
+feedzai-altair-theme==2.0.0
+
+# --- Your usual libs ---
 pandas
-numpy
 tqdm
 torch
 matplotlib
+seaborn
 scikit-learn
 xgboost
-shap
-timeshap
-seaborn
+
+# --- Maps (you import cartopy) ---
+cartopy
