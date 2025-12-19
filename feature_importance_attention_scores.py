@@ -127,7 +127,7 @@ month_map = {
 data_paths = [
     ("data/test_sest/experiment_1/North_Atlantic/North_Atlantic_test_2018_experiment_1.pkl",
      "North_Atlantic"),
-    ("data/test_sest/experiment_1/North_Atlantic/Southern_Ocean_test_2018_experiment_1.pkl",
+    ("data/test_sest/experiment_1/Southern_Ocean/Southern_Ocean_test_2018_experiment_1.pkl",
      "Southern_Ocean"),
 ]
 

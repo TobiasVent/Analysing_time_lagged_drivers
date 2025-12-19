@@ -44,7 +44,7 @@ print(f"Using device: {device}")
 cache_dir = "/media/stu231428/1120 7818/Master_github/datasets/cache"
 
 #directory where you want to save the plots
-out_dir = ""
+out_dir = "data/results/model_metrics"
 
 # -------------------------------------------------------------------------
 # Model definitions
@@ -78,10 +78,10 @@ data_paths = [
     "Southern_Ocean_experiment_1",
     
     "global_experiment_1",
-    "North_Atlantic_5",
+    "North_Atlantic_experiment_5",
     "Southern_Ocean_experiment_5",
     
-    "global_experiment_5"
+    
 
 ]
 
@@ -167,4 +167,4 @@ for path in data_paths:
     results_df = pd.DataFrame(all_results)
     csv_path = os.path.join(out_dir, f"model_metrics_monthly_and_total_{region_key}.csv")
     results_df.to_csv(csv_path, index=False)
-    print(f"\n✅ Ergebnisse gespeichert unter: {csv_path}")
+    print(f"\n Ergebnisse gespeichert unter: {csv_path}")

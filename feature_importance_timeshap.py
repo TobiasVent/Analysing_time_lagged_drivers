@@ -108,31 +108,6 @@ def extract_cell_matrix(cell_data, feature_names, window_size):
     return mat
 
 
-def plot_heatmap(mean_vals, feature_names, title="Mean SHAP heatmap", experiment_name="experiment_name"):
-    """
-    Plot and save a heatmap of mean SHAP values across timesteps and features.
-    """
-    plt.figure(figsize=(12, 6))
-    x_labels = ["t -3", "t -2", "t -1", "t -0"]
-
-    sns.heatmap(
-        mean_vals.T,
-        cmap="Reds",
-        xticklabels=x_labels,
-        yticklabels=feature_names,
-        annot=True,
-    )
-
-    plt.xlabel("Time step")
-    plt.ylabel("Feature")
-    plt.title(title)
-
-    out_dir = f"/data/stu231428/Master_Thesis/main/final_plots/feature_importance/{experiment_name}/"
-    os.makedirs(out_dir, exist_ok=True)
-
-    out_file = os.path.join(out_dir, title + experiment_name)
-    plt.savefig(out_file, dpi=150)
-    plt.close()
 
 
 # -------------------------------------------------------------------------

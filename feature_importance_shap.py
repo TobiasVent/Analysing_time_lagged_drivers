@@ -262,11 +262,12 @@ region_map = {
 
 #paths to the test set you want to explain
 
-yearly_paths = [
-    ("/media/stu231428/1120 7818/Master_github/datasets/yearly/North_Atlantic_test_2018_experiment_1.pkl",
-     "North Atlantic", "experiment_1"),
-    ("/media/stu231428/1120 7818/Master_github/datasets/yearly/Southern_Ocean_test_2018_experiment_1.pkl",
-     "Southern Ocean", "experiment_1"),
+# Paths to yearly test datasets
+data_paths = [
+    ("data/test_sest/experiment_1/North_Atlantic/North_Atlantic_test_2018_experiment_1.pkl",
+     "North_Atlantic"),
+    ("data/test_sest/experiment_1/Southern_Ocean/Southern_Ocean_test_2018_experiment_1.pkl",
+     "Southern_Ocean"),
 ]
 
 feature_columns = ['SST', 'SAL', 'ice_frac', 'mixed_layer_depth', 'heat_flux_down',
@@ -281,11 +282,11 @@ dynamic_features = [
 ]
 
 
-out_dir =""
+out_dir ="data/results/feature_importance/"
 for m in models_list:
     run_shap_workflow_for_model_yearly(
         m["model"], m["name"],
-        yearly_paths=yearly_paths,
+        yearly_paths=data_paths,
         out_dir= out_dir,
         feature_columns=feature_columns,
         dynamic_features=dynamic_features
