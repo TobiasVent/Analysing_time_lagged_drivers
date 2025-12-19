@@ -12,8 +12,13 @@ Sample = namedtuple("Sample", ["features", "target", "meta"])
 # SETTINGS
 # ==========================
 # Define the year range to reconstruct
-START_YEAR = 2018
+START_YEAR = 2009
 END_YEAR = 2018
+
+
+#for experiment 5
+# START_YEAR = 1959
+# END_YEAR = 2018
 
 region = "North_Atlantic"
 experiment = "experiment_1"
