@@ -9,12 +9,12 @@ import os
 from sklearn.metrics import mean_squared_error
 from matplotlib.patches import Patch
 import calendar
-START_YEAR = 2012
-END_YEAR = 2012
+START_YEAR = 2018
+END_YEAR = 2018
 
 
 
-experiment_name = "experiment_5"
+experiment_name = "experiment_1"
 out_dir = "data/results/annual_seasonal_plots/"
 
 # -------------------------------------------------------------------------
@@ -28,14 +28,14 @@ print(f"Using device: {device}")
 # -------------------------------------------------------------------------
 
 
-model_files = ["LSTM","Attention_LSTM","MLP","XGBoost"]
-
+#model_files = ["LSTM","Attention_LSTM","MLP","XGBoost"]
+model_files = ["LSTM","LSTM","LSTM","LSTM"]
 
 
 # -------------------------------------------------------------------------
 # Helper: Daten laden und vorverarbeiten (mit Cache in Python, nicht Pickle)
 # -------------------------------------------------------------------------
-def load_df_cache(ocean, model_name, cache_dict):
+def load_df_cache(ocean, model_name):
     """
     Lädt und verarbeitet df_cache für eine (ocean, model_name)-Kombination.
     
@@ -45,6 +45,7 @@ def load_df_cache(ocean, model_name, cache_dict):
 
     if experiment_name ==  "experiment_1":
         START_YEAR = 2009
+        
         END_YEAR  = 2018
     if experiment_name == "experiment_5":
         START_YEAR = 1959
@@ -104,7 +105,7 @@ def load_df_cache(ocean, model_name, cache_dict):
     year_counts = years.value_counts().sort_index()
     print(f"  Entries per year (first 5): {year_counts.head().to_dict()}")
     print(f"  Entries per year (last 5):  {year_counts.tail().to_dict()}")
-    cache_dict[key] = df_cache
+    
     return df_cache
 
 
@@ -112,7 +113,7 @@ def load_df_cache(ocean, model_name, cache_dict):
 # Plots vorbereiten
 # -------------------------------------------------------------------------
 oceans = ["North Atlantic", "Southern Ocean"]
-
+#oceans = ["North_Atlantic","North_Atlantic"]
 
 fig_yearly, axes_yearly = plt.subplots(
     4, 2,
@@ -126,8 +127,6 @@ fig_seasonal, axes_seasonal = plt.subplots(
     constrained_layout=True
 )
 
-# Cache für DataFrames (damit pro (ocean, model) nur einmal geladen wird)
-df_cache_dict = {}
 
 # -------------------------------------------------------------------------
 # Main Loop: beide Figuren in einem Rutsch füllen
@@ -136,7 +135,7 @@ for col_idx, ocean in enumerate(oceans):
     #for row_idx, (model_name, (ModelClass, model_path, model_kwargs)) in enumerate(model_files.items()):
     for row_idx, model_name in enumerate(model_files):
 
-        df_cache = load_df_cache(ocean, model_name, df_cache_dict)
+        df_cache = load_df_cache(ocean, model_name)
 
         # MSE nur einmal berechnen
         mse = mean_squared_error(df_cache["co2flux_pre"], df_cache["reconstructed_co2flux_pre"])
