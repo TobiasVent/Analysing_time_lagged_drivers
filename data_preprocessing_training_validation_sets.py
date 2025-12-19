@@ -131,11 +131,11 @@ def preprocess_data(feature_mean = 0,feature_stds =0,target_mean = 0,target_std 
 
 
 
-featre_mean, feature_stds, target_mean, target_std = preprocess_data(frac=0.01, out_dir="data/training_set",range_start=1958, range_end=1959,training=True)
+featre_mean, feature_stds, target_mean, target_std = preprocess_data(frac=0.01, out_dir="data/training_set",range_start=1958, range_end=1988,training=True)
 
 
 
-featre_mean, feature_stds, target_mean, target_std = preprocess_data(featre_mean, feature_stds, target_mean, target_std, frac=0.01, out_dir="data/validation_set/", range_start=1960, range_end=1961,training=False)
+featre_mean, feature_stds, target_mean, target_std = preprocess_data(featre_mean, feature_stds, target_mean, target_std, frac=0.01, out_dir="data/validation_set/", range_start= 1989, range_end=2008,training=False)
 
 
 
