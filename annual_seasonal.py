@@ -38,11 +38,9 @@ model_files = ["LSTM","Attention_LSTM","MLP","XGBoost"]
 def load_df_cache(ocean, model_name, cache_dict):
     """
     Lädt und verarbeitet df_cache für eine (ocean, model_name)-Kombination.
-    Nutzt ein dict cache_dict, damit die Daten nur einmal von Platte gelesen werden.
+    
     """
-    key = (ocean, model_name)
-    if key in cache_dict:
-        return cache_dict[key]
+
     
 
     if experiment_name ==  "experiment_1":
@@ -52,31 +50,31 @@ def load_df_cache(ocean, model_name, cache_dict):
         START_YEAR = 1959
         END_YEAR = 2018
 
-    else:
+    
         
 
-        years = range(START_YEAR, END_YEAR + 1)
+    years = range(START_YEAR, END_YEAR + 1)
 
-        files = []
-        missing_years = []
-        cache_dir = f"data/reconstruction_cache/{experiment_name}/{ocean}"
-        for year in years:
-            path = f"{cache_dir}/{model_name}_{ocean}_reconstruction_{year}_{experiment_name}.pkl"
-            if os.path.exists(path):
-                files.append(path)
-            else:
-                missing_years.append(year)
+    files = []
+    missing_years = []
+    cache_dir = f"data/reconstruction_cache/{experiment_name}/{ocean}"
+    for year in years:
+        path = f"{cache_dir}/{model_name}_{ocean}_reconstruction_{year}_{experiment_name}.pkl"
+        if os.path.exists(path):
+            files.append(path)
+        else:
+            missing_years.append(year)
 
-        #  Fehler werfen, wenn Zeitraum nicht vollständig verfügbar
-        if missing_years:
-            raise FileNotFoundError(
-                f" Reconstruction files missing for years: {missing_years}\n"
-                f"Requested period: {START_YEAR}–{END_YEAR}\n"
-                f"Base path: {cache_dir}\n"
-                f"Model: {model_name}"
-            )
-        dfs = [pd.read_pickle(fp) for fp in files]
-        df_cache = pd.concat(dfs, ignore_index=True)
+    #  Fehler werfen, wenn Zeitraum nicht vollständig verfügbar
+    if missing_years:
+        raise FileNotFoundError(
+            f" Reconstruction files missing for years: {missing_years}\n"
+            f"Requested period: {START_YEAR}–{END_YEAR}\n"
+            f"Base path: {cache_dir}\n"
+            f"Model: {model_name}"
+        )
+    dfs = [pd.read_pickle(fp) for fp in files]
+    df_cache = pd.concat(dfs, ignore_index=True)
 
 
 
@@ -113,8 +111,8 @@ def load_df_cache(ocean, model_name, cache_dict):
 # -------------------------------------------------------------------------
 # Plots vorbereiten
 # -------------------------------------------------------------------------
-#oceans = ["North Atlantic", "Southern Ocean"]
-oceans = ["global", "global",]
+oceans = ["North Atlantic", "Southern Ocean"]
+
 
 fig_yearly, axes_yearly = plt.subplots(
     4, 2,
