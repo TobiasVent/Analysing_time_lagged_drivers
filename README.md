@@ -1,3 +1,14 @@
+## Abstract
+
+The Earth system model FOCI-MOPS integrates physical and biogeochemical components of the ocean to simulate key processes of the global carbon cycle, including oceanic CO₂ fluxes. However, its biogeochemical module is computationally demanding, which limits simulation efficiency. This thesis investigates whether these CO₂ fluxes can be reconstructed solely from time-lagged physical ocean parameters using deep learning methods, while maintaining reliable predictive performance.
+
+Four models were implemented and compared: XGBoost, a Multi-Layer Perceptron (MLP), a standard Long Short-Term Memory (LSTM) network, and an Attention-LSTM incorporating both input and temporal attention mechanisms. The results demonstrate that oceanic CO₂ fluxes can be successfully reconstructed from lagged physical parameters using deep learning models. Among the tested approaches, the standard LSTM achieved the best overall performance. Additionally, explainable AI methods were applied to assess the influence of lagged physical variables on model predictions. The feature importance analysis revealed that recent time steps contribute more strongly to the predictions than variables with longer lags. Although the Attention-LSTM did not outperform the standard LSTM in accuracy, it provides improved interpretability by leveraging attention mechanisms to highlight the most relevant time steps and enhance model transparency.
+
+This thesis presents a promising approach to accelerate climate simulations while enhancing model transparency.
+
+
+
+
 ## Data Exploration
 
 As a first step in the data exploration workflow, execute:
