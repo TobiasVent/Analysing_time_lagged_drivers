@@ -201,8 +201,14 @@ def preprocess_yearwise(
 
 #REGION Options: global, North_Atlantic, Southern_Ocean. It has to be spelled like that 
 experiment_name = "experiment_1"
+YEARS = range(2009, 2018+1)
+
+
 #experiment_name = "experiment_5"
-YEARS = range(2018, 2019)
+
+#YEARS = range(1959),2018+1)
+
+
 #REGION = "global"
 REGION = "North_Atlantic"
 #REGION = "Southern_Ocean"
